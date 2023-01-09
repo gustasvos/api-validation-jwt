@@ -54,3 +54,5 @@ gem "bcrypt", "~> 3.1"
 gem "solargraph", "~> 0.48.0"
 
 gem "byebug", "~> 11.1", :groups => [:development, :test]
+
+gem "rest-client", "~> 2.1"
