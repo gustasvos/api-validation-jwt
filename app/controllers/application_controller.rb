@@ -29,5 +29,3 @@ class ApplicationController < ActionController::API
         render json: { message: 'You need to be logged in' }, status: :unauthorized unless authorized_user
     end
 end
-
-

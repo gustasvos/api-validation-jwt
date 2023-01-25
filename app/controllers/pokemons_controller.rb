@@ -2,18 +2,19 @@ class PokemonsController < ApplicationController
   before_action :authorize
   before_action :set_pokemon, only: %i[ show update destroy ]
 
+  # funcao merge sobrepoe dados iguais tenho q passar por cima disso ae
   # GET /pokemons
   def index
-    @pokemons = @user.pokemons.all
-
-    @pokemons.each do |p|
-      @pokemons_data = RestClient.get("https://pokeapi.co/api/v2/pokemon/#{p.name}")
+    @pokemons = {}
+    
+    for i in @user.pokemons.all do
+      response = JSON.parse RestClient.get("https://pokeapi.co/api/v2/pokemon/#{i.name}")
+      @pokemons.merge! response
     end
 
-    # @pokemons_data = RestClient.get()
     # @pokemons = RestClient.get("https://pokeapi.co/api/v2/pokemon/")
 
-    render json: @pokemons_data
+    render json: @pokemons
   end
 
   # GET /pokemons/1
